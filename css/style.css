@@ -76,13 +76,17 @@
 	position: relative;
 	flex-wrap: wrap;
 	justify-content: center;
-	margin: 200px auto;
+	margin: 150px auto;
 	background: #64686D;
 	width: 65%;
 	padding: 55px;
     box-sizing: border-box;
 	border-radius: 5px;
 	border: 2px solid #F6F9FD;
+	max-height: 100%;
+}
+.lightbox img{
+	width: 100%;
 }
 .close {
 	position: absolute;
@@ -117,6 +121,8 @@
 .movie-info-container {
 	flex-basis: 65%;
 	color: #F6F9FD;
+	padding-left: 50px;
+    box-sizing: border-box;
 }
 .plot-container {
 	flex-basis: 100%;

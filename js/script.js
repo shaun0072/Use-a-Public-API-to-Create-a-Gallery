@@ -1,9 +1,9 @@
 $(document).ready(function() {
 
-	function searchMovies() {
-		$('.results_list').remove();
-		var title = document.getElementById('title');
-		var movie = $('#title').val();
+var title = document.getElementById('title');
+
+	function searchMovies() {		
+		var movie = $(title).val();
 		var year  = $('#year').val();
 		var API = "http://www.omdbapi.com/?";
 		var movieData = {
@@ -25,7 +25,8 @@ $(document).ready(function() {
 				}	
 			});//End .each()
 			movieHTML += '</ul>';
-			$('#results_container').append(movieHTML).hide().fadeIn();
+			$('.results_list').remove(); //Clear current results
+			$('#results_container').append(movieHTML).hide().fadeIn(); //Append Results to #results_container
 		}
 		$.getJSON(API, movieData, displayMovie);
 		title.value = "";
@@ -40,7 +41,7 @@ $(document).ready(function() {
 		API += '&plot=full&tomatoes=true&r=json';
 		function displayMovie(data) {
 			$('#overlay').remove();
-			var overlay = '<div id="overlay"><div class="lightbox"><span class="close">X</span><span class="next">Next</span><div class="poster-container"><img class="poster" src="';
+			var overlay = '<div id="overlay"><div class="lightbox"><span class="close">X</span><div class="poster-container"><img class="poster" src="';
 				overlay += data.Poster;
 				overlay += '" /></div><div class="movie-info-container"><div class="title-container"><span class="label">Title: </span><span class="title">';
 				overlay += data.Title;
@@ -62,34 +63,18 @@ $(document).ready(function() {
 		}
 		$.getJSON(API, displayMovie);
 	} //End showMovieInfo
-	
-	function showNext() {
-		var $lightbox = $(this).parent(); // Get $(this).parent() which is lightbox
-		var $currentTitle = $lightbox.find('.title').text(); // Get decendant .title
-		var $movieList = $('#results_container').find('.result_item');
-		var $movieListImg = $movieList.find('img');
-		$.each($movieListImg, function(i, movieList) {  // Cycle over each result_item
-		$movieListItem = $(movieList);
-		  if($currentTitle === $movieListItem.attr('data')) {   //if  $currentTitle === $dataAttr
-			$nextMovie = $($movieListItem.parent()[0].nextSibling).find('img');  // Call img.attr("data").parent().next().showMovieInfo()
-			$nextMovie = $($nextMovie[0]);
-			console.log($nextMovie);
-			$nextMovie.showMovieInfo();
-		  }	//end if
-		}); //end each function
-	} //end showNext()
+
 	
 	/*App*/
-	$('#search').click(searchMovies);
-	$('#title').keydown(function(e) {
+	$('#search').click(searchMovies); //Call searhMovies() on click of search button
+	$('#title').keydown(function(e) { //Call searchMovies() on Enter keydown
 		var key = e.which;
 		if(key === 13) {
 			searchMovies();
 		}
 	});
-	$('#results_container').on('click', 'img', showMovieInfo);
-	/* $('body').on('click', '.next', showNext); */
-	$('body').on('click', '.close', function() {
+	$('#results_container').on('click', 'img', showMovieInfo); //Call showMovieInfo on click of img
+	$('body').on('click', '.close', function() { //Hide lightbox on click of .close
 		$('#overlay').fadeOut();		
 	});
 	
