@@ -76,14 +76,16 @@
 	position: relative;
 	flex-wrap: wrap;
 	justify-content: center;
-	margin: 150px auto;
+	margin: 50px auto;
 	background: #64686D;
-	width: 65%;
-	padding: 55px;
+	width: 45%;
+	padding: 30px;
     box-sizing: border-box;
 	border-radius: 5px;
-	border: 2px solid #F6F9FD;
-	max-height: 100%;
+	border: 2px solid #F6F9FD;	
+}
+.lightbox * {
+	font-size: 15px;
 }
 .lightbox img{
 	width: 100%;
@@ -116,7 +118,7 @@
 	opacity: 1;
 }
 .poster-container {
-	flex-basis: 35%
+	flex-basis: 35%;
 }
 .movie-info-container {
 	flex-basis: 65%;
